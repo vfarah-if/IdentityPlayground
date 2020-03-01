@@ -1,4 +1,6 @@
 using System;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,17 @@ namespace Basics
                     options.Cookie.Name = "Grandmas.Cookie";
                     options.LoginPath = "/Home/Authenticate";
                 });
+
+            // Added as an example to show how you could override authorization add claims validation will get access denied 
+            //services.AddAuthorization(options =>
+            //{
+            //    var defaultAuthBuilder = new AuthorizationPolicyBuilder();
+            //    var defaultAuthPolicy = defaultAuthBuilder
+            //    .RequireAuthenticatedUser()
+            //    .RequireClaim(ClaimTypes.DateOfBirth)
+            //    .Build();
+            //    options.DefaultPolicy = defaultAuthPolicy;
+            //});
 
             // Added to utilise views
             services.AddControllersWithViews();
@@ -45,7 +58,7 @@ namespace Basics
             // What are you allowed to see?
             app.UseAuthorization();
 
-            
+
             app.UseEndpoints(endpoints =>
             {
                 // Added to map default controllers
