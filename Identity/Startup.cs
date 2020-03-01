@@ -12,8 +12,6 @@ namespace Identity
 {
     public class Startup
     {
-        private const string CookieAuthenticationName = "CookieAuth";
-
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -37,7 +35,7 @@ namespace Identity
             services.ConfigureApplicationCookie(options => 
             {
                 options.Cookie.Name = "Identity.Cookie";
-                options.LoginPath = "/Home/Login";
+                options.LoginPath = "/Login";
             });
 
             // Added to utilise views

@@ -1,6 +1,6 @@
 ﻿# Introduction
 
-This will introduce identity into the project and how basic can be upgraded to utilise Identity 4 more sophisticated authentication mechanisms. Look at history to see changes
+This will introduce identity into the project and how basic can be upgraded to utilise basic Identity, a more sophisticated authentication mechanisms. Look at history to see changes
 
 ## Steps to reproduce
 
@@ -25,6 +25,3 @@ This will introduce identity into the project and how basic can be upgraded to u
 10. **Inject** the ***UserManager*** and ***SignManager*** into the home controller and setup dependency which is wired through singleton dependency injection when setting up the service
 
 11. Play with app to see flows working and configure more options in sign up to understand simple identity logic
-
-    
-
