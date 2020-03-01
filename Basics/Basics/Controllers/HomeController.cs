@@ -20,6 +20,18 @@ namespace Basics.Controllers
             return View();
         }
 
+        [Authorize(Policy = "Claim.DOB")]
+        public IActionResult SecretPolicy()
+        {
+            return View("Secret");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult SecretRole()
+        {
+            return View("Secret");
+        }
+
         public IActionResult Authenticate()
         {
             var grandmaIdentity = CreateGrandmaClaims();
@@ -37,6 +49,8 @@ namespace Basics.Controllers
             {
                 new Claim(ClaimTypes.Name, "Bob"),
                 new Claim(ClaimTypes.Email, "bob@mail.com"),
+                new Claim(ClaimTypes.DateOfBirth, "11/04/2000"),
+                new Claim(ClaimTypes.Role, "Admin"),
                 new Claim("Grandma says", "Good kid, honest")
             };
             return new ClaimsIdentity(grandmaClaims, "Grandma Identity");

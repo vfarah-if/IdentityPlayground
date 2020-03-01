@@ -1,5 +1,6 @@
 using System;
 using System.Security.Claims;
+using Basics.AuthorizationRequirements;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,15 +26,25 @@ namespace Basics
                 });
 
             // Added as an example to show how you could override authorization add claims validation will get access denied 
-            //services.AddAuthorization(options =>
-            //{
-            //    var defaultAuthBuilder = new AuthorizationPolicyBuilder();
-            //    var defaultAuthPolicy = defaultAuthBuilder
-            //    .RequireAuthenticatedUser()
-            //    .RequireClaim(ClaimTypes.DateOfBirth)
-            //    .Build();
-            //    options.DefaultPolicy = defaultAuthPolicy;
-            //});
+            services.AddAuthorization(options =>
+            {
+                // Example 1 
+                //    var defaultAuthBuilder = new AuthorizationPolicyBuilder();
+                //    var defaultAuthPolicy = defaultAuthBuilder
+                //    .RequireAuthenticatedUser()
+                //    .RequireClaim(ClaimTypes.DateOfBirth)
+                //    .Build();
+                //    options.DefaultPolicy = defaultAuthPolicy;
+
+                // Example 2                 
+                // options.AddPolicy("Claim.DOB", policyBuilder => policyBuilder.RequireClaim(ClaimTypes.DateOfBirth);
+
+                // Example 3 - or could have done this an extension method
+                options.AddPolicy("Claim.DOB", policyBuilder => policyBuilder.AddRequirements(new CustomClaimRequirement(ClaimTypes.DateOfBirth)));
+            });
+
+            //Added for example 3 where I can use dependency injection to pass in CustomClaimRequirmentHandler and any other injection that may use
+            services.AddScoped<IAuthorizationHandler, CustomClaimRequirmentHandler>();
 
             // Added to utilise views
             services.AddControllersWithViews();

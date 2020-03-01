@@ -12,5 +12,8 @@ Basics is about introducing the basics of ASP .net Core 3.(n) and simple authent
 6. Linkup cookie authentication
 7. Refactor Authorise to sign in with claims, identities and principle and this will allow an authorised page to be viewed
 8. *UseAuthentication* should be done first to set identity and *UseAuthorization* should then verify what you are authorized to view
+9. Added a commented out example of showing how one can work with claims and the policy builder. 
+10. Create custom claim handler and custom claim and showed how to inject this as a service for common use with entire solution
+11. Show how to retro fit roles, a legacy concept that should be avoided, utilise it as a claim
 
 View cookie generated and view page being opened once the sign occurs. Basic scenario shows simple authorization model in very few steps.
